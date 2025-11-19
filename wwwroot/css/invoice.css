@@ -1,0 +1,124 @@
+﻿.toolbar {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap; /
+}
+
+    .toolbar input,
+    .toolbar select,
+    .toolbar button {
+        min-height: 38px;
+    }
+
+#totalSummary {
+    font-weight: 600;
+    color: #0d6efd;
+}
+
+.invoice-table-container {
+    margin-top: 10px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    overflow-y: auto;
+    max-height: 240px !important; 
+    border: 1px solid #dee2e6;
+    scrollbar-width: thin; 
+}
+
+.invoice-table {
+    margin-bottom: 0;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .invoice-table thead {
+        background-color: #f8f9fa;
+        font-weight: 500;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+    }
+
+    .invoice-table tbody tr {
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+
+        .invoice-table tbody tr:hover {
+            background-color: #eef5ff;
+        }
+
+#paginationContainer {
+    margin-top: 10px;
+    user-select: none;
+}
+
+    #paginationContainer button {
+        min-width: 36px;
+        transition: all 0.2s;
+    }
+
+    #paginationContainer .btn-outline-primary:hover {
+        background-color: #0d6efd;
+        color: #fff;
+    }
+
+.invoice-detail {
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    max-height: 400px;
+    overflow-y: auto; 
+}
+
+    .invoice-detail h5 {
+        font-weight: 600;
+        color: #0d6efd;
+    }
+
+    .invoice-detail table {
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+        .invoice-detail table thead {
+            background-color: #e9ecef;
+        }
+
+.modal-body table input {
+    width: 80px;
+    text-align: center;
+}
+
+.modal-body table td {
+    vertical-align: middle;
+}
+
+#returnTotal {
+    font-size: 1.1rem;
+    color: #dc3545;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .invoice-table-container {
+        max-height: 350px;
+    }
+}
+
+.container, .report-container {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    margin: 0 !important;
+}

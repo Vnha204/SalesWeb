@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Cài đặt hệ thống";
+    bool enabled = (bool)ViewData["EnablePrintPreview"];
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/settings.css" />
+}
+
+<div class="container py-4" style="max-width: 650px;">
+    <h3 class="mb-4">Cài đặt hệ thống</h3>
+
+    @if (TempData["msg"] != null)
+    {
+        <div class="alert alert-success">@TempData["msg"]</div>
+    }
+
+    <form asp-action="UpdatePrintPreview" method="post" class="p-4 shadow rounded bg-white">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <strong>Xem trước hóa đơn</strong>
+                <div class="text-muted small">Bật để hiển thị preview trước khi in</div>
+            </div>
+
+            <label class="ios-switch">
+                <input type="checkbox" name="enabled" value="true" @(enabled ? "checked" : "")>
+                <span class="ios-slider"></span>
+            </label>
+        </div>
+
+        <hr />
+
+        <button type="submit" class="btn btn-primary px-4">Lưu thay đổi</button>
+    </form>
+</div>

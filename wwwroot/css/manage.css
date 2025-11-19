@@ -1,0 +1,77 @@
+﻿.employee-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.employee-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.employee-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    padding: 15px 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .employee-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+.employee-info {
+    flex: 1;
+}
+
+.employee-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.employee-code,
+.employee-role {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin: 0;
+}
+
+.employee-kpi {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+}
+
+.kpi-chart {
+    width: 70px;
+    height: 70px;
+}
+
+.kpi-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+.container, .report-container {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    margin: 0 !important;
+}
+#modalBody label {
+    color: #0d6efd;
+}
+
+#modalBody textarea {
+    resize: none;
+}

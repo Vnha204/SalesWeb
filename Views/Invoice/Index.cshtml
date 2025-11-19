@@ -1,0 +1,116 @@
+﻿@{
+    ViewData["Title"] = "Hóa đơn";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/invoice.css" />
+}
+
+<div class="container">
+    <div class="toolbar d-flex align-items-center gap-2 mb-3">
+        <input type="text" id="searchInput" class="form-control w-auto flex-grow-1" placeholder="Tìm theo mã hóa đơn..." />
+
+        <select id="filterSelect" class="form-select w-auto" style="min-width: 180px;">
+            <option value="all">Toàn thời gian</option>
+            <option value="today">Hôm nay</option>
+            <option value="week" selected>Tuần này</option>
+            <option value="month">Tháng này</option>
+            <option value="year">Năm nay</option>
+        </select>
+
+        <a asp-controller="Home" asp-action="Index" class="btn btn-success">
+            + Thêm hóa đơn
+        </a>
+    </div>
+    <div class="mb-2 text-end">
+        <span id="totalSummary" class="fw-bold text-primary fs-5">Tổng cộng: 0 đ</span>
+    </div>
+    <div class="invoice-table-container border rounded" style="max-height: 500px; overflow-y: auto;">
+        <table class="invoice-table table table-hover align-middle mb-0">
+            <thead class="table-light sticky-top">
+                <tr>
+                    <th style="width: 25%">Thời gian</th>
+                    <th style="width: 25%">Mã hóa đơn</th>
+                    <th style="width: 25%">Tổng tiền</th>
+                    <th style="width: 25%">Mã trả hàng</th>
+                </tr>
+            </thead>
+            <tbody id="invoiceList">
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-center align-items-center gap-2 mt-3" id="paginationContainer">
+        <button class="btn btn-outline-primary btn-sm" id="prevPageBtn">&laquo;</button>
+        <div id="paginationNumbers" class="d-flex gap-2"></div>
+        <button class="btn btn-outline-primary btn-sm" id="nextPageBtn">&raquo;</button>
+    </div>
+</div>
+<div id="invoiceDetail" class="invoice-detail mt-4 p-3 border rounded bg-light d-none">
+    <h5>Chi tiết hóa đơn <span id="detailCode" class="text-primary"></span></h5>
+
+    <div id="detailItems">
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Giá</th>
+                    <th>Thành tiền</th>
+                </tr>
+            </thead>
+            <tbody id="detailBody"></tbody>
+        </table>
+    </div>
+
+    <div class="text-end mt-3">
+        <strong>Tổng cộng:</strong> <span id="detailTotal" class="fw-bold text-danger">0 đ</span>
+    </div>
+
+    <div class="text-end mt-3">
+        <button class="btn btn-warning" id="returnBtn">Trả hàng</button>
+    </div>
+</div>
+<div class="modal fade" id="returnModal" tabindex="-1" aria-labelledby="returnModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="returnModalLabel">Trả hàng - <span id="returnInvoiceCode"></span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Tên sản phẩm</th>
+                            <th>Đã mua</th>
+                            <th>Đã trả</th>
+                            <th>Còn lại</th>
+                            <th>Trả thêm</th>
+                            <th>Giá</th>
+                            <th>Hoàn tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody id="returnTableBody">
+                    </tbody>
+                </table>
+                <div class="text-end">
+                    <strong>Tổng tiền hoàn:</strong>
+                    <span id="returnTotal" class="fw-bold text-danger">0 đ</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" id="confirmReturnBtn" class="btn btn-primary">Xác nhận trả hàng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="currentSellerId" value="@Context.Session.GetInt32("CurrentUserId")" />
+
+@section Scripts {
+    <script src="~/js/invoice.js"></script>
+    <script>
+        console.log("currentSellerId =", document.getElementById("currentSellerId")?.value);
+    </script>
+
+}

@@ -1,0 +1,163 @@
+﻿@{
+    ViewData["Title"] = "Quản lý Sản phẩm";
+    Layout = "_Layout";
+    var role = ViewData["UserRole"]?.ToString();
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/products.css" />
+}
+
+<div class="container py-3">
+    <div class="d-flex align-items-center mb-3 gap-2">
+        <input id="productSearch" class="form-control me-2" type="search" placeholder="Tìm theo mã hoặc tên sản phẩm..." />
+
+        @if (role == "manager")
+        {
+            <button id="btnAddProduct" class="btn btn-primary" title="Thêm sản phẩm">
+                <i class="bi bi-plus-circle me-1"></i> Thêm
+            </button>
+        }
+    </div>
+
+    <div id="productGrid" class="row g-3">
+    </div>
+</div>
+<div class="modal fade" id="modalAddProduct" tabindex="-1" aria-labelledby="modalAddProductLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <form id="formAddProduct">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAddProductLabel">Thêm sản phẩm mới</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-4 text-center">
+                            <div class="img-preview-placeholder mb-2">
+                                <img id="addImagePreview" src="https://via.placeholder.com/240x160?text=Ảnh" alt="Preview" />
+                            </div>
+                            <input type="file" id="addImageInput" accept="image/*" class="form-control form-control-sm" />
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="mb-2">
+                                <label class="form-label">Mã sản phẩm</label>
+                                <input id="addCode" class="form-control" readonly />
+                                <small class="text-muted">(**Mã tự sinh khi lưu**)</small>
+                            </div>
+
+                            <div class="mb-2">
+                                <label class="form-label">Tên sản phẩm</label>
+                                <input id="addName" class="form-control" required />
+                            </div>
+
+                            <div class="mb-2">
+                                <label class="form-label">Giá tiền</label>
+                                <input id="addPrice" type="number" min="0" class="form-control" required />
+                            </div>
+
+                            <div class="mb-2">
+                                <label class="form-label">Số lượng tồn</label>
+                                <input id="addStock" type="number" min="0" class="form-control" required />
+                            </div>
+
+                            <div class="mb-2">
+                                <label class="form-label">Mô tả</label>
+                                <textarea id="addDesc" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    @if (role == "manager")
+                    {
+                        <button id="btnSaveAdd" type="submit" class="btn btn-primary">Lưu</button>
+                    }
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalEditProduct" tabindex="-1" aria-labelledby="modalEditProductLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <form id="formEditProduct">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEditProductLabel">Chi tiết sản phẩm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-4 text-center">
+                            <div class="img-preview-placeholder mb-2">
+                                <img id="editImagePreview" src="https://via.placeholder.com/240x160?text=Ảnh" alt="Preview" />
+                            </div>
+                            @if (role == "manager")
+                            {
+                                <input type="file" id="editImageInput" accept="image/*" class="form-control form-control-sm" />
+                            }
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="mb-2">
+                                <label class="form-label">Mã sản phẩm</label>
+                                <input id="editCode" class="form-control" readonly />
+                            </div>
+
+                            <div class="mb-2">
+                                <label class="form-label">Tên sản phẩm</label>
+                                <input id="editName" class="form-control" @(role == "staff" ? "readonly" : "") required />
+                            </div>
+
+                            <div class="mb-2">
+                                <label class="form-label">Giá tiền</label>
+                                <input id="editPrice" type="number" min="0" class="form-control" @(role == "staff" ? "readonly" : "") required />
+                            </div>
+
+                            <div class="mb-2">
+                                <label class="form-label">Số lượng tồn</label>
+                                <input id="editStock" type="number" min="0" class="form-control" @(role == "staff" ? "readonly" : "") required />
+                            </div>
+
+                            <div class="mb-2">
+                                <label class="form-label">Mô tả</label>
+                                <textarea id="editDesc" class="form-control" rows="3" @(role == "staff" ? "readonly" : "")></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="btnCancelEdit" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    @if (role == "manager")
+                    {
+                        <button id="btnSaveEdit" type="submit" class="btn btn-primary" disabled>Lưu</button>
+                    }
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@if (role == "manager")
+{
+    <div class="fab-group">
+        <div class="fab fab-import" id="fabImport" title="Nhập hàng">
+            <i class='bx bx-arrow-in-down-square'></i>
+            <span class="fab-label">Nhập hàng</span>
+        </div>
+        <div class="fab fab-return" id="fabReturn" title="Trả hàng nhập">
+            <i class='bx bx-arrow-out-up-square'></i>
+            <span class="fab-label">Trả hàng nhập</span>
+        </div>
+    </div>
+}
+
+<input type="hidden" id="userRole" value="@role" />
+
+@section Scripts {
+    <script src="~/js/products.js"></script>
+}

@@ -1,0 +1,56 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Đăng nhập";
+}
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    <link rel="stylesheet" href="~/css/Login.css" asp-append-version="true" />
+    <link href='https://cdn.boxicons.com/3.0.3/fonts/basic/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert">@TempData["Error"]</div>
+    }
+    <div class="wrapper">
+        <form asp-controller="Login" asp-action="Index" method="post">
+            <h1>Đăng nhập</h1>
+
+            <div class="input-box">
+                <input type="text" name="username" placeholder="Tên đăng nhập" required />
+                <i class='bx bx-user'></i>
+            </div>
+
+            <div class="input-box">
+                <input type="password" name="password" placeholder="Mật khẩu" required />
+                <i class='bx bx-lock'></i>
+            </div>
+
+            <div class="remmember-forgot">
+                <label>
+                    <input type="checkbox" name="remember" /> Duy trì đăng nhập
+                </label>
+                <a href="#" id="forgotLink">Quên mật khẩu?</a>
+            </div>
+
+            <button type="submit" class="btn">Đăng nhập</button>
+        </form>
+    </div>
+    <div class="modal" id="forgotModal" style="display:none;">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <h2>Quên mật khẩu</h2>
+            <p>Vui lòng liên hệ với người quản lý để được cấp lại tài khoản hoặc mật khẩu mới.</p>
+        </div>
+    </div>
+    <script src="~/js/login.js"></script>
+</body>
+</html>
+

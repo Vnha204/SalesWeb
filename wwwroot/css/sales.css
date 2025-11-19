@@ -1,0 +1,217 @@
+﻿html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.container-fluid {
+    height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.row {
+    flex: 1;
+    margin: 0;
+}
+
+.col-md-8, .col-md-4 {
+    height: 100%;
+    padding: 0 5px;
+}
+
+.card {
+    height: 100%;
+    border-radius: 0;
+}
+
+#productList {
+    overflow-y: auto;
+    max-height: calc(100vh - 240px);
+}
+
+.col-md-4 .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.col-md-4 .card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+}
+
+.invoice-items {
+    flex-shrink: 0;
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 5px;
+    background-color: #fafafa;
+}
+
+.invoice-footer {
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    margin-top: 10px;
+    padding: 10px 0;
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+}
+
+.invoice-tabs-container {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+    .invoice-tabs-container::-webkit-scrollbar {
+        display: none;
+    }
+
+#invoiceTabs {
+    display: flex;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    margin-bottom: 0;
+    overflow-x: auto;
+}
+
+    #invoiceTabs .nav-link {
+        border-radius: 8px 8px 0 0;
+        background-color: #f1f1f1;
+        margin-right: 3px;
+        transition: all 0.2s;
+        padding: 6px 24px 6px 12px;
+        flex-shrink: 0;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: visible; 
+    }
+
+        #invoiceTabs .nav-link.active {
+            background-color: #fff;
+            border-bottom-color: transparent;
+            font-weight: 500;
+        }
+
+    #invoiceTabs .tab-title {
+        display: inline-block;
+        max-width: 110px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    #invoiceTabs .tab-close {
+        position: absolute;
+        right: 4px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: bold;
+        font-size: 15px;
+        color: #888;
+        cursor: pointer;
+        padding: 0 4px;
+        border-radius: 4px;
+        z-index: 3;
+        transition: color 0.2s ease;
+    }
+
+        #invoiceTabs .tab-close:hover {
+            color: red;
+            background-color: rgba(0,0,0,0.05);
+        }
+
+#savedInvoicesBtn {
+    border: none;
+    background: transparent;
+}
+
+#savedInvoicesDropdown {
+    min-width: 220px;
+}
+
+    #savedInvoicesDropdown li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #savedInvoicesDropdown .delete-temp {
+        color: #dc3545;
+        cursor: pointer;
+        margin-left: 8px;
+    }
+
+#invoiceTabContent {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+    #invoiceTabContent > .tab-pane {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+    }
+
+        #invoiceTabContent > .tab-pane.active {
+            display: flex;
+            flex-direction: column;
+        }
+.tab-content > .tab-pane {
+    display: none !important;
+    position: relative !important;
+    width: 100% !important;
+}
+
+    .tab-content > .tab-pane.active {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+#invoiceTabs .nav-link {
+    padding-right: 28px !important; 
+    position: relative;
+    overflow: visible;
+}
+
+#invoiceTabs .tab-close {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: bold;
+    font-size: 15px;
+    color: #888;
+    cursor: pointer;
+    padding: 0 4px;
+    border-radius: 4px;
+    z-index: 3;
+    transition: color 0.2s ease;
+}
+
+    #invoiceTabs .tab-close:hover {
+        color: red;
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+.container, .report-container {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    margin: 0 !important;
+}

@@ -1,0 +1,98 @@
+﻿.report-container {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    gap: 15px;
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 10px;
+}
+
+.chart-box {
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    margin-bottom: 15px;
+}
+
+    .chart-box h5 {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+
+canvas {
+    max-height: 150px; 
+}
+
+.summary-boxes {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 5px;
+}
+
+.summary-box {
+    flex: 1;
+    text-align: center;
+    padding: 8px 5px;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.summary-profit {
+    background-color: #28a745;
+}
+
+.summary-revenue {
+    background-color: #007bff;
+}
+
+.summary-cost {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.employee-progress {
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+    .employee-progress h5 {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+.employee-item {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.progress {
+    height: 10px;
+    border-radius: 5px;
+    background: #e9ecef;
+}
+
+.progress-bar {
+    border-radius: 5px;
+}
+
+
+body {
+   font-size: 1rem;
+   line-height: 1.5;
+}
+
+main {
+    padding: 1rem 1.5rem ;
+    background: #f9fafb;
+}
+.container, .report-container {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    margin: 0 !important;
+}
